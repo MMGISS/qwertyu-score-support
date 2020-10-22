@@ -33,4 +33,5 @@ Unity 2020.1.0f1 で製作の音ゲー「QWERTY:U」の譜面シンタックス�
 ### v0.1.3 2020/10/22
 
 - Githubにてリポジトリを作成
-- 
+- https://github.com/MMGISS/qwertyu-score-support
+- Download ZIPをおすすめします
