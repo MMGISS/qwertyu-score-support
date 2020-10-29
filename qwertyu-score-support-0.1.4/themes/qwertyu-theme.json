@@ -3,7 +3,7 @@
 	"type": "dark",
 	"colors": {
 		"activityBar.background": "#272822",
-		"activityBar.dropBackground": "#414339",
+		//"activityBar.dropBackground": "#414339",
 		"activityBar.foreground": "#f8f8f2",
 		"badge.background": "#75715e",
 		"badge.foreground": "#f8f8f2",
@@ -562,35 +562,42 @@
 		{
 			"scope": "qwerty.longnoteid",
 			"settings": {
-				"foreground": "#d373ff",
+				"foreground": "#c193d6",
 				"fontStyle": "underline"
 			}
 		},
 		{
 			"scope": "qwerty.lanemove.axis.x",
 			"settings": {
-				"foreground": "#ffbab5",
+				"foreground": "#ebaaa5",
 				"fontStyle": "underline italic bold"
 			}
 		},
 		{
 			"scope": "qwerty.lanemove.axis.y",
 			"settings": {
-				"foreground": "#d1ffb3",
+				"foreground": "#bce4a1",
 				"fontStyle": "underline italic bold"
 			}
 		},
 		{
 			"scope": "qwerty.lanemove.axis.z",
 			"settings": {
-				"foreground": "#aaddff",
+				"foreground": "#96c5e4",
 				"fontStyle": "underline italic bold"
 			}
 		},
 		{
 			"scope": "qwerty.lanemove.alpha",
 			"settings": {
-				"foreground": "#a7a6ff",
+				"foreground": "#a09fd8",
+				"fontStyle": "underline italic bold"
+			}
+		},
+		{
+			"scope": "qwerty.lanemove.rotate",
+			"settings": {
+				"foreground": "#b0d8c0",
 				"fontStyle": "underline italic bold"
 			}
 		},
@@ -604,6 +611,7 @@
 			"scope": "qwerty.lanemove.number.to",
 			"settings": {
 				"foreground": "#7a70ff",
+				"fontStyle": "bold"
 			}
 		},
 		{

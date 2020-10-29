@@ -89,9 +89,10 @@
 			},
 			"patterns": [
 				{"include": "#notes"},
-				{"include": "#laneMoves"},
+				{"include": "#laneMovers"},
 				{"include": "#args_path"},
 				{"include": "#args_speed"},
+				{"include": "#args_posfrom"},
 				{"include": "#meta_bpm"},
 				{"include": "#meta_scroll"},
 				{"include": "#meta_jump"},
@@ -118,18 +119,19 @@
 				}
 			}]
 		},
-		"laneMoves": {
+		"laneMovers": {
 			"patterns": [{
-				"match": "\\( *([dr]?[xyz]|a) *([^ ]+)? *([0-9.-]+)? *([0-9.-]+)? *([0-9.-]+)? *\\)",
+				"match": "\\( *(c?[dr]?[xyz]|a) *([^ ]+)? *([0-9.-]+)? *([0-9.-]+)? *([0-9.-]+)? *\\)",
 				"captures": {
 					"1": {
 						"patterns":[{
-							"match": "([dr]?x)?([dr]?y)?([dr]?z)?(a)?",
+							"match": "(c?[dr]?x)?(c?[dr]?y)?(c?[dr]?z)?(a)?",
 							"captures": {
 								"1": {"name": "qwerty.lanemove.axis.x"},
 								"2": {"name": "qwerty.lanemove.axis.y"},
 								"3": {"name": "qwerty.lanemove.axis.z"},
-								"4": {"name": "qwerty.lanemove.alpha"}
+								"4": {"name": "qwerty.lanemove.alpha"},
+								"5": {"name": "qwerty.lanemove.rotate"}
 							}
 						}]
 					},
@@ -142,16 +144,25 @@
 		},
 		"args_path": {
 			"patterns": [{
-				"match": "\\( *(path) *([^ ]+?)? *\\)",
+				"match": "\\( *(path|p) *([^ ]+?)? *\\)",
 				"captures": {
 					"1": {"name": "qwerty.arguments"},
 					"2": {"patterns": [{"include": "#scorePath"}]}
 				}
 			}]
 		},
+		"args_posfrom": {
+			"patterns": [{
+				"match": "\\( *(positionfrom|posfrom|pf) *([0-9.-]+?)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.arguments"},
+					"2": {"name": "qwerty.lanemove.number.from"}
+				}
+			}]
+		},
 		"args_speed": {
 			"patterns": [{
-				"match": "\\( *(speed) *([0-9.-]+?)? *\\)",
+				"match": "\\( *(speed|sp) *([0-9.-]+?)? *\\)",
 				"captures": {
 					"1": {"name": "qwerty.arguments"},
 					"2": {"name": "qwerty.number.speed"}
@@ -170,7 +181,7 @@
 		},
 		"meta_scroll": {
 			"patterns": [{
-				"match": "\\( *(scroll) *([^ ]+)? *([0-9.-]+?)? *([0-9.-]+)? *\\)",
+				"match": "\\( *(scroll|scr) *([^ ]+)? *([0-9.-]+?)? *([0-9.-]+)? *\\)",
 				"captures": {
 					"1": {"name": "qwerty.meta.name"},
 					"2": {"name": "qwerty.lane"},
@@ -181,7 +192,7 @@
 		},
 		"meta_jump": {
 			"patterns": [{
-				"match": "\\( *(jump) *([^ ]+)? *([0-9.-]+?)? *([0-9.-]+)? *\\)",
+				"match": "\\( *(jump|jmp) *([^ ]+)? *([0-9.-]+?)? *([0-9.-]+)? *\\)",
 				"captures": {
 					"1": {"name": "qwerty.meta.name"},
 					"2": {"name": "qwerty.lane"},

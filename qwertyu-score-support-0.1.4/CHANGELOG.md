@@ -35,3 +35,10 @@ Unity 2020.1.0f1 で製作の音ゲー「QWERTY:U」の譜面シンタックス�
 - Githubにてリポジトリを作成
 - https://github.com/MMGISS/qwertyu-score-support
 - Download ZIPをおすすめします
+
+### v0.1.4 2020/10/29
+
+- positionfrom命令の実装
+- 命令の簡略化の実装
+  path → p
+  positionfrom → pf など。
