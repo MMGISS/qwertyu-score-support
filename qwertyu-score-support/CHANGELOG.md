@@ -1,8 +1,10 @@
 # QWERTY:U Score Support
 
-Unity 2020.1.0f1 で製作の音ゲー「QWERTY:U」の譜面シンタックスハイライト拡張機能です
+Unity2020で製作中の音ゲー「QWERTY:U」の譜面シンタックスハイライト拡張機能です
 拡張子.qwertuscore及び.qwertyuscore.txtを認識します
 チェンジログの書き方はよく分かっていないのでお粗末
+
+文法についてはここを参照されたし → https://hackmd.io/YJ8Fh3zfRaebYHNJWjPONg
 
 ## ご使用方法
 
@@ -41,4 +43,8 @@ Unity 2020.1.0f1 で製作の音ゲー「QWERTY:U」の譜面シンタックス�
 - positionfrom命令の実装
 - 命令の簡略化の実装
   path → p
-  positionfrom → pf など。
+  positionfrom → pf など
+
+### v0.1.5 2020/11/02
+
+- beatdefault命令の実装

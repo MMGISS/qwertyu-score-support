@@ -595,7 +595,7 @@
 			}
 		},
 		{
-			"scope": "qwerty.lanemove.rotate",
+			"scope": "qwerty.lanemove.camera",
 			"settings": {
 				"foreground": "#b0d8c0",
 				"fontStyle": "underline italic bold"
