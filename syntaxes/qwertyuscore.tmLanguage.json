@@ -1,0 +1,269 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "qwertyuscore",
+	"patterns": [
+		{"include": "#comment_singleline"},
+		{"include": "#comment_multiline"},
+		{"include": "#metaInfos"},
+		{"include": "#pathes"},
+		{"include": "#score"}
+	],
+	"repository": {
+		"metaInfos": {
+			"patterns": [{
+				"match": "^(title|author|bgm|bgmvol|bpm|scroll|offset)(:)(.+)",
+				"captures": {
+					"1": {"name": "keyword.control"},
+					"3": {"name": "constant.numeric"}
+				}
+			}]
+		},
+
+		"pathes": {
+			"begin": "(path)",
+			"beginCaptures": {
+				"1": {"name": "keyword.control"}
+			},
+			"end": "(?=score:)",
+			"patterns": [
+				{"include": "#comment_singleline"},
+				{"include": "#comment_multiline"},
+				{
+					"match": "(.*?)( .+)",
+					"captures": {
+						"1": {"name": "qwerty.path"},
+						"2": {
+							"patterns": [{
+								"match": "(M|m|L|l)([0-9,. -]+)|(C|c)([0-9,. -]+)|(H|h)([0-9,. -]+)|(V|v)([0-9,. -]+)",
+								"captures": {
+									"1": {"name": "qwerty.path.ML.lighter"},
+									"2": {
+										"patterns": [{
+											"match": "([^ ]+)( [^ ]+)?",
+											"captures": {
+												"1": {"name": "qwerty.path.ML.darker"},
+												"2": {"name": "qwerty.path.ML.middle"}
+											}
+										}]
+									},
+									"3": {"name": "qwerty.path.C.lighter"},
+									"4": {
+										"patterns": [{
+											"match": "([^ ]+ [^ ]+ [^ ]+)( [^ ]+ [^ ]+ [^ ]+)?",
+											"captures": {
+												"1": {"name": "qwerty.path.C.darker"},
+												"2": {"name": "qwerty.path.C.middle"}
+											}
+										}]
+									},
+									"5": {"name": "qwerty.path.H.lighter"},
+									"6": {
+										"patterns": [{
+											"match": "([^ ]+)( [^ ]+)?",
+											"captures": {
+												"1": {"name": "qwerty.path.H.darker"},
+												"2": {"name": "qwerty.path.H.middle"}
+											}
+										}]
+									},
+									"7": {"name": "qwerty.path.V.lighter"},
+									"8": {
+										"patterns": [{
+											"match": "([^ ]+)( [^ ]+)?",
+											"captures": {
+												"1": {"name": "qwerty.path.V.darker"},
+												"2": {"name": "qwerty.path.V.middle"}
+											}
+										}]
+									}
+								}
+							}]
+						}
+					}
+				}
+			]
+		},
+
+		"score": {
+			"begin": "(score):",
+			"beginCaptures": {
+				"1": {"name": "keyword.control"}
+			},
+			"patterns": [
+				{"include": "#notes"},
+				{"include": "#laneMovers"},
+				{"include": "#args_path"},
+				{"include": "#args_speed"},
+				{"include": "#args_posfrom"},
+				{"include": "#args_beatdefault"},
+				{"include": "#meta_bpm"},
+				{"include": "#meta_scroll"},
+				{"include": "#meta_jump"},
+				{"include": "#startingPoint"},
+				{"include": "#comment_singleline"},
+				{"include": "#comment_multiline"}
+			]
+		},
+
+		"notes": {
+			"patterns": [{
+				"match": "\\( *([1234]) *( [^ ]+)? *( [0-9.-]+)? *( [^ ]+)? *\\)",
+				"captures": {
+					"1": {
+						"patterns":[{
+							"match": "([13])?([24]?)",
+							"captures": {
+								"1": {"name": "qwerty.note.tapnote"},
+								"2": {"name": "qwerty.note.slidenote"}
+							}
+						}]
+					},
+					"2": {"name": "qwerty.lane"},
+					"3": {"patterns": [{"include": "#evenNumJudger"}]},
+					"4": {"name": "qwerty.longnoteid"}
+				}
+			}]
+		},
+		"laneMovers": {
+			"patterns": [{
+				"match": "\\( *(c?~?[dr]?[xyz]|~?a) *( [^ ]+)? *( [0-9.-]+)? *( [0-9.-]+)? *( [0-9.-]+)? *\\)",
+				"captures": {
+					"1": {
+						"patterns":[{
+							"match": "(c)?(?:(~?[dr]?x)|(~?[dr]?y)|(~?[dr]?z)|(~?a))",
+							"captures": {
+								"1": {"name": "qwerty.lanemove.camera"},
+								"2": {"name": "qwerty.lanemove.axis.x"},
+								"3": {"name": "qwerty.lanemove.axis.y"},
+								"4": {"name": "qwerty.lanemove.axis.z"},
+								"5": {"name": "qwerty.lanemove.alpha"},
+								"6": {"name": "qwerty.lanemove.rotate"}
+							}
+						}]
+					},
+					"2": {"name": "qwerty.lane"},
+					"3": {"patterns": [{"include": "#evenNumJudger"}]},
+					"4": {"name": "qwerty.lanemove.number.from"},
+					"5": {"name": "qwerty.lanemove.number.to"}
+				}
+			}]
+		},
+		"args_path": {
+			"patterns": [{
+				"match": "\\( *(path|p) *( [^ ]+?)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.arguments"},
+					"2": {"patterns": [{"include": "#scorePath"}]}
+				}
+			}]
+		},
+		"args_posfrom": {
+			"patterns": [{
+				"match": "\\( *(positionfrom|posfrom|pf) *( [0-9.-]+?)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.arguments"},
+					"2": {"name": "qwerty.lanemove.number.from"}
+				}
+			}]
+		},
+		"args_beatdefault": {
+			"patterns": [{
+				"match": "\\( *(beatdefault|beatdef|bd) *( [0-9.-]+?)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.arguments"},
+					"2": {"patterns": [{"include": "#evenNumJudger"}]}
+				}
+			}]
+		},
+		"args_speed": {
+			"patterns": [{
+				"match": "\\( *(speed|sp) *( [0-9.-]+?)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.arguments"},
+					"2": {"name": "qwerty.number.speed"}
+				}
+			}]
+		},
+
+		"meta_bpm": {
+			"patterns": [{
+				"match": "\\( *(bpm) *( [0-9.-]+?)? *( [0-9.-]+)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.meta.name"},
+					"2": {"patterns": [{"include": "#evenNumJudger"}]},
+					"3": {"name": "qwerty.meta.param1"}
+				}
+			}]
+		},
+		"meta_scroll": {
+			"patterns": [{
+				"match": "\\( *(scroll|scr) *( [^ ]+)? *( [0-9.-]+?)? *( [0-9.-]+)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.meta.name"},
+					"2": {"name": "qwerty.lane"},
+					"3": {"patterns": [{"include": "#evenNumJudger"}]},
+					"4": {"name": "qwerty.meta.param1"}
+				}
+			}]
+		},
+		"meta_jump": {
+			"patterns": [{
+				"match": "\\( *(jump|jmp) *( [^ ]+)? *( [0-9.-]+?)? *( [0-9.-]+)? *\\)",
+				"captures": {
+					"1": {"name": "qwerty.meta.name"},
+					"2": {"name": "qwerty.lane"},
+					"3": {"patterns": [{"include": "#evenNumJudger"}]},
+					"4": {"name": "qwerty.meta.param1"}
+				}
+			}]
+		},
+		"startingPoint": {
+			"patterns": [{
+				"match": "(\\( *>) *( [0-9.-]+?)? *(\\))",
+				"captures": {
+					"1": {"name": "qwerty.startingPoint"},
+					"2": {"patterns": [{"include": "#evenNumJudger"}]},
+					"3": {"name": "qwerty.startingPoint"}
+				}
+			}]
+		},
+
+		"scorePath": {
+			"patterns": [{
+				"match": "((?<!,)-)?([^,]+)(,)?",
+				"captures": {
+					"1": {"name": "keyword.control"},
+					"2": {"name": "qwerty.path"},
+					"3": {"name": "keyword.control"}
+				}
+			}]
+		},
+		"evenNumJudger": {
+			"patterns": [{
+				"match": "(?:(-?\\d*[02468](?:\\.\\d*|$))|(-?\\d*[13579](?:\\.\\d*|$)))",
+				"captures": {
+					"1": {"name": "qwerty.number.even"},
+					"2": {"name": "qwerty.number.odd"}
+				}
+			}]
+		},
+
+		"comment_singleline": {
+			"patterns": [{
+				"match": "//.*?$",
+				"name": "comment.line"
+			}]
+		},
+		"comment_multiline": {
+			"begin": "\\/\\*",
+			"beginCaptures": {"0": {"name": "comment.line"}},
+			"end": "\\*\\/",
+			"endCaptures": {"0": {"name": "comment.line"}},
+			"patterns": [{
+				"match": "^.*$",
+				"name": "comment.line"
+			}]
+		}
+	},
+	"scopeName": "source.qwertyuscore"
+}

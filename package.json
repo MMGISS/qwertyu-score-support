@@ -1,0 +1,30 @@
+{
+    "name": "qwertyu-score-support",
+    "displayName": "Qwerty:U Score Support",
+    "description": "Supports to build score of music game \"QWERTY:U\" made by Unity",
+    "version": "0.1.5",
+    "engines": {
+        "vscode": "^1.45.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "qwertyuscore",
+            "aliases": ["QWERTY:U Score Support", "qwertyuscore"],
+            "extensions": [".qwertyuscore.txt", ".qwertyuscore"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "qwertyuscore",
+            "scopeName": "source.qwertyuscore",
+            "path": "./syntaxes/qwertyuscore.tmLanguage.json"
+        }],
+        "themes": [{
+            "label": "Monokai (QWERTY:U Score Support Arrange)",
+            "uiTheme": "vs-dark",
+            "path": "./themes/qwertyu-theme.json"
+        }]
+    }
+}
